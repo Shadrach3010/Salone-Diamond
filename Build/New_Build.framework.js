@@ -1334,10 +1334,10 @@ function dbg(text) {
 // === Body ===
 
 var ASM_CONSTS = {
-  4536212: () => { Module['emscripten_get_now_backup'] = performance.now; },  
- 4536267: ($0) => { performance.now = function() { return $0; }; },  
- 4536315: ($0) => { performance.now = function() { return $0; }; },  
- 4536363: () => { performance.now = Module['emscripten_get_now_backup']; }
+  3571144: () => { Module['emscripten_get_now_backup'] = performance.now; },  
+ 3571199: ($0) => { performance.now = function() { return $0; }; },  
+ 3571247: ($0) => { performance.now = function() { return $0; }; },  
+ 3571295: () => { performance.now = Module['emscripten_get_now_backup']; }
 };
 
 
@@ -8013,10 +8013,6 @@ var ASM_CONSTS = {
       abort(`Assertion failed: ${UTF8ToString(condition)}, at: ` + [filename ? UTF8ToString(filename) : 'unknown filename', line, func ? UTF8ToString(func) : 'unknown function']);
     }
 
-  function ___dlsym(handle, symbol) {
-      warnOnce('__dlsym: Unable to open DLL! Dynamic linking is not supported in WebAssembly builds due to limitations to performance and code size. Please statically link in the needed libraries.');
-    }
-
   function ___syscall__newselect(nfds, readfds, writefds, exceptfds, timeout) {
   try {
   
@@ -9733,10 +9729,6 @@ var ASM_CONSTS = {
 
   function _abort() {
       abort('native code called abort()');
-    }
-
-  function _dlopen(handle) {
-      warnOnce('dlopen: Unable to open DLL! Dynamic linking is not supported in WebAssembly builds due to limitations to performance and code size. Please statically link in the needed libraries.');
     }
 
   var readEmAsmArgsArray = [];
@@ -11979,32 +11971,6 @@ var ASM_CONSTS = {
   
       var stream = SYSCALLS.getStreamFromFD(fd);
       FS.close(stream);
-      return 0;
-    } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
-    return e.errno;
-  }
-  }
-
-  function _fd_fdstat_get(fd, pbuf) {
-  try {
-  
-      var rightsBase = 0;
-      var rightsInheriting = 0;
-      var flags = 0;
-      {
-        var stream = SYSCALLS.getStreamFromFD(fd);
-        // All character devices are terminals (other things a Linux system would
-        // assume is a character device, like the mouse, we have special APIs for).
-        var type = stream.tty ? 2 :
-                   FS.isDir(stream.mode) ? 3 :
-                   FS.isLink(stream.mode) ? 7 :
-                   4;
-      }
-      HEAP8[((pbuf)>>0)] = type;
-      HEAP16[(((pbuf)+(2))>>1)] = flags;
-      HEAP64[(((pbuf)+(8))>>3)] = BigInt(rightsBase);
-      HEAP64[(((pbuf)+(16))>>3)] = BigInt(rightsInheriting);
       return 0;
     } catch (e) {
     if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
@@ -16726,7 +16692,6 @@ var wasmImports = {
   "JS_WebRequest_SetRequestHeader": _JS_WebRequest_SetRequestHeader,
   "JS_WebRequest_SetTimeout": _JS_WebRequest_SetTimeout,
   "__assert_fail": ___assert_fail,
-  "__dlsym": ___dlsym,
   "__syscall__newselect": ___syscall__newselect,
   "__syscall_accept4": ___syscall_accept4,
   "__syscall_chmod": ___syscall_chmod,
@@ -16763,7 +16728,6 @@ var wasmImports = {
   "_munmap_js": __munmap_js,
   "_tzset_js": __tzset_js,
   "abort": _abort,
-  "dlopen": _dlopen,
   "emscripten_asm_const_int": _emscripten_asm_const_int,
   "emscripten_cancel_main_loop": _emscripten_cancel_main_loop,
   "emscripten_clear_interval": _emscripten_clear_interval,
@@ -16816,7 +16780,6 @@ var wasmImports = {
   "environ_sizes_get": _environ_sizes_get,
   "exit": _exit,
   "fd_close": _fd_close,
-  "fd_fdstat_get": _fd_fdstat_get,
   "fd_read": _fd_read,
   "fd_seek": _fd_seek,
   "fd_write": _fd_write,
