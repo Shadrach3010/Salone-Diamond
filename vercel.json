@@ -2,23 +2,20 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "headers": [
     {
-      "source": "/Build/New_Build.framework.js.br",
+      "source": "/Build/New_Build.framework.js",
       "headers": [
-        { "key": "Content-Encoding", "value": "br" },
         { "key": "Content-Type", "value": "application/javascript" }
       ]
     },
     {
-      "source": "/Build/New_Build.wasm.br",
+      "source": "/Build/New_Build.wasm",
       "headers": [
-        { "key": "Content-Encoding", "value": "br" },
         { "key": "Content-Type", "value": "application/wasm" }
       ]
     },
     {
-      "source": "/Build/New_Build.data.br",
+      "source": "/Build/New_Build.data",
       "headers": [
-        { "key": "Content-Encoding", "value": "br" },
         { "key": "Content-Type", "value": "application/octet-stream" }
       ]
     }
